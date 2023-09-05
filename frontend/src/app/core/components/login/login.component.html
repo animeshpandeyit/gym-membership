@@ -1,15 +1,69 @@
-<p>login works!</p>
-
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 d-flex flex-column justify-content-center p-5">
-      <h1>
-        Make the commitment to yourself. The first step of embarking on your
-        fitness journey is to make the commitment to yourself to start.
-      </h1>
+    <div class="col-md-6 p-3">
+      <div class="background-image">
+        <p class="catchyfont p-5">
+          Make the commitment to yourself. The first step of embarking on your
+          fitness journey is to make the commitment to yourself to start.
+        </p>
+      </div>
     </div>
-    <div class="col-md-6 d-flex flex-column justify-content-center p-5">
-      <h2>start small. ... But login first</h2>
+    <div class="col-md-6 p-3">
+      <div class="spray" (click)="loginPage()">
+        <img src="../../../../assets/52c67a.gif" alt="" />
+        <p class="catchyfont p-5" *ngIf="!islogin">
+          start small. ... But login first click me to login
+        </p>
+      </div>
+
+      <div class="d-flex flex-column justify-content-center" *ngIf="islogin">
+        <h1 class="catchyfont-s mt-4 mb-2">Sign In to</h1>
+        <p class="catchyfont-s">
+          Not a member?
+          <span
+            class="catchyfont-s"
+            style="cursor: pointer"
+            routerLink="/create_account"
+            >create your account</span
+          >
+        </p>
+
+        <div class="form-group mt-3">
+          <label class="catchyfont-s"
+            >E-mail<span class="text-danger">*</span></label
+          >
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="Type Email address"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+            required
+          />
+        </div>
+
+        <div class="form-group mt-3">
+          <label class="catchyfont-s"
+            >Password <span class="text-danger">*</span></label
+          >
+          <input
+            type="password "
+            class="form-control"
+            name="email"
+            placeholder="Please enter your password"
+            required
+          />
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="catchyfont-s m-0 mt-3" routerLink="/forgot-password">
+            Forgot your password ?
+          </p>
+        </div>
+        <button mat-button class="catchyfont-s mt-4" (click)="loginFirst()">
+          Sign In
+        </button>
+      </div>
     </div>
   </div>
 </div>

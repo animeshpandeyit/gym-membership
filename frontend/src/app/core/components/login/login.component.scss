@@ -1,0 +1,17 @@
+.background-image {
+  background-image: url("../../../../assets/gym.gif");
+  background-size: cover; /* <------ */
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 95vh;
+}
+.spray {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+::placeholder {
+  font-family: "Black Ops One", cursive;
+}

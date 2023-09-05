@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [],
@@ -74,6 +75,7 @@ import { NgModule } from '@angular/core';
     MatNativeDateModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [],
