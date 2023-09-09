@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClientModule } from './modules/client/client.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './core/services/auth.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,8 +18,11 @@ import { SharedModule } from './shared/shared.module';
     ClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

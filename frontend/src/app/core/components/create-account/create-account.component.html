@@ -1,1 +1,111 @@
-<p>create-account works!</p>
+
+<div class="create-registration">
+  <div class="center-div mt-5">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mt-3">
+        <label class="catchyfont-s">Full Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          required
+          minlength="4"
+          [(ngModel)]="registrationModel.name"
+          #name="ngModel"
+        />
+
+        <div
+          *ngIf="name.invalid && (name.dirty || name.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="name.errors?.['required']">Name is required.</div>
+          <div *ngIf="name.errors?.['minlength']">
+            Name must be at least 4 characters long.
+          </div>
+        </div>
+      </div>
+
+      <!--  -->
+
+      <div class="form-group mt-3">
+        <label class="catchyfont-s">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          required
+          [(ngModel)]="registrationModel.email"
+          #email="ngModel"
+          pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+        />
+
+        <div
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="email.errors?.['required']">Email is required.</div>
+          <div *ngIf="email.errors?.['pattern']">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+
+      <!--  -->
+      <div class="form-group mt-3">
+        <label class="catchyfont-s">Password:</label>
+        <input
+          type="password "
+          id="password "
+          name="password "
+          class="form-control"
+          required
+          [(ngModel)]="registrationModel.password"
+          #password="ngModel"
+        />
+
+        <div
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+        </div>
+      </div>
+
+      <!--  -->
+
+      <div class="form-group mt-3">
+        <label class="catchyfont-s">Phone:</label>
+        <input
+          type="number"
+          id="phone"
+          name="phone"
+          class="form-control"
+          required
+          [(ngModel)]="registrationModel.phone"
+          #phone="ngModel"
+          maxlength="10"
+          pattern="^[0-9]\d{9}$"
+        />
+
+        <div
+          *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="phone .errors?.['required']">Mobile no is Required</div>
+          <div *ngIf="phone .errors?.['pattern']">Enter a valid No.</div>
+        </div>
+      </div>
+
+      <!-- Add more form fields as needed -->
+      <button
+        type="submit"
+        class="btn btn-primary mt-4 catchyfont-s"
+        [disabled]="!registerForm.valid"
+      >
+        Create Customer
+      </button>
+    </form>
+  </div>
+</div>

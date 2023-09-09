@@ -28,32 +28,36 @@
           >
         </p>
 
-        <div class="form-group mt-3">
-          <label class="catchyfont-s"
-            >E-mail<span class="text-danger">*</span></label
-          >
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            placeholder="Type Email address"
-            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
-            required
-          />
-        </div>
+        <form [formGroup]="loginForm">
+          <div class="form-group mt-3">
+            <label class="catchyfont-s"
+              >E-mail<span class="text-danger">*</span></label
+            >
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              formControlName="email"
+              placeholder="Type Email address"
+              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+              required
+            />
+          </div>
 
-        <div class="form-group mt-3">
-          <label class="catchyfont-s"
-            >Password <span class="text-danger">*</span></label
-          >
-          <input
-            type="password "
-            class="form-control"
-            name="email"
-            placeholder="Please enter your password"
-            required
-          />
-        </div>
+          <div class="form-group mt-3">
+            <label class="catchyfont-s"
+              >Password <span class="text-danger">*</span></label
+            >
+            <input
+              type="password "
+              class="form-control"
+              formControlName="password"
+              name="password"
+              placeholder="Please enter your password"
+              required
+            />
+          </div>
+        </form>
 
         <div class="d-flex align-items-center justify-content-between">
           <p class="catchyfont-s m-0 mt-3" routerLink="/forgot-password">

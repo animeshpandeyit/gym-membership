@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +10,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   islogin: boolean = false;
 
+  loginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+  });
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -18,5 +24,6 @@ export class LoginComponent implements OnInit {
 
   loginFirst() {
     this.router.navigate(['/user/home']);
+    console.log(this.loginForm.value);
   }
 }
