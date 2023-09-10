@@ -43,17 +43,19 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email: email }).select("+password");
+  const user = await User.findOne({ email }).select("+password");
   if (!user) {
     res
       .status(404)
       .json({ message: "invalid email or password", success: false });
   }
-  const isMatch = await bcrypt.compare(password, user.password);
+  /* The line `const isMatch = await bcrypt.compare(password, user.password);` is comparing the
+  provided password with the hashed password stored in the user object. */
+  const isMatch = await bcrypt.compare(req.body.password, user.password);
   if (!isMatch) {
     res
       .status(404)
       .json({ success: false, message: "invalid email or password" });
   }
-  sendCookie(user, res, `${user.name} is logged in`, 200);
+  sendCookie(user, res, `Welcome back, ${user.name}`, 200);
 };

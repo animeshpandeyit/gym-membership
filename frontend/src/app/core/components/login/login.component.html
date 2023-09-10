@@ -28,18 +28,18 @@
           >
         </p>
 
-        <form [formGroup]="loginForm">
+        <form #loginForm="ngForm" (ngSubmit)="loginFirst()">
           <div class="form-group mt-3">
             <label class="catchyfont-s"
               >E-mail<span class="text-danger">*</span></label
             >
             <input
-              type="email"
               class="form-control"
-              name="email"
-              formControlName="email"
+              [(ngModel)]="loginUserData.email"
               placeholder="Type Email address"
-              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+              type="text"
+              id="username"
+              name="username"
               required
             />
           </div>
@@ -51,22 +51,20 @@
             <input
               type="password "
               class="form-control"
-              formControlName="password"
+              [(ngModel)]="loginUserData.password"
+              id="password"
               name="password"
               placeholder="Please enter your password"
               required
             />
           </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <p class="catchyfont-s m-0 mt-3" routerLink="/forgot-password">
+              Forgot your password ?
+            </p>
+          </div>
+          <button mat-button class="catchyfont-s mt-4">Sign In</button>
         </form>
-
-        <div class="d-flex align-items-center justify-content-between">
-          <p class="catchyfont-s m-0 mt-3" routerLink="/forgot-password">
-            Forgot your password ?
-          </p>
-        </div>
-        <button mat-button class="catchyfont-s mt-4" (click)="loginFirst()">
-          Sign In
-        </button>
       </div>
     </div>
   </div>
