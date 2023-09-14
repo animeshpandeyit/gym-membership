@@ -11,14 +11,10 @@ import { LoginUserDataModel } from '../../models/login-data.model';
 export class LoginComponent implements OnInit {
   islogin: boolean = false;
 
-/* The `loginUserData` object is used to store the email and password entered by the user during the
-login process. It is initialized with empty strings for both properties. */
   loginUserData = {
     email: '',
     password: '',
   };
-
-  // loginUserData = {};
 
   constructor(private router: Router, private _auth: AuthService) {}
 
@@ -31,11 +27,9 @@ login process. It is initialized with empty strings for both properties. */
   loginFirst() {
     this._auth.loginUser(this.loginUserData).subscribe(
       (res) => {
-        console.log('res::', res);
         if (res.token) {
           localStorage.setItem('token', res.token);
           console.log('Token stored:', res.token);
-
           this.router.navigate(['/user/home']);
         } else {
           console.log('Authentication failed. Token not received.');
@@ -46,4 +40,21 @@ login process. It is initialized with empty strings for both properties. */
       }
     );
   }
+  // async loginFirst() {
+  //   try {
+  //     const res = await this._auth
+  //       .loginUser(this.loginUserData)
+  //       .subscribe((res) => {
+  //         if (res.token) {
+  //           localStorage.setItem('token', res.token);
+  //           console.log('Token stored:', res.token);
+  //           this.router.navigate(['/user/home']);
+  //         } else {
+  //           console.log('Authentication failed. Token not received.');
+  //         }
+  //       });
+  //   } catch (err) {
+  //     console.log('Login error:', err);
+  //   }
+  // }
 }
