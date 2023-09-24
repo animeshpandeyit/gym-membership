@@ -7,8 +7,9 @@ import { ClientModule } from './modules/client/client.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './core/services/auth.service';
+import { TokenInterceptorService } from './core/services/interceptor/token-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,11 @@ import { AuthService } from './core/services/auth.service';
   ],
   providers: [
     AuthService,
-    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

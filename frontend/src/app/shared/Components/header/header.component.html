@@ -51,16 +51,18 @@
         </li>
       </ul>
     </div>
-    <!-- <button mat-button class="btn action-btn" (click)="getProfile()">
+    <button mat-button class="btn action-btn" (click)="getUserDetails()">
       get Profile
-    </button> -->
+    </button>
     <button mat-button class="btn action-btn" (click)="logoutUser()">
       logout....
     </button>
   </div>
 </nav>
+<!--  -->
 <div *ngIf="user">
-  <h2>{{ user.name }}</h2>
+  <h2>User Details</h2>
+  <p>Name: {{ user.name }}</p>
   <p>Email: {{ user.email }}</p>
-  <!-- Add more fields as needed -->
+  <!-- Display other user details as needed -->
 </div>

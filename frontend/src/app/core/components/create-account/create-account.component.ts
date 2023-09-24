@@ -31,7 +31,7 @@ export class CreateAccountComponent implements OnInit {
         console.log(res);
         localStorage.setItem('token', res.token);
         // const token = res.token;
-        console.log('Token stored:', res.token);
+        console.log('Token stored register:', res.token);
       },
       (error) => {
         console.error('Error creating customer', error);

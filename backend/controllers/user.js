@@ -28,6 +28,7 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
+
   const user = await User.findOne({ email })
     .select("+password")
     .maxTimeMS(20000);
@@ -36,8 +37,7 @@ export const login = async (req, res) => {
       .status(404)
       .json({ message: "invalid email or password", success: false });
   }
-  /* The line `const isMatch = await bcrypt.compare(password, user.password);` is comparing the
-  provided password with the hashed password stored in the user object. */
+
   const isMatch = await bcrypt.compare(req.body.password, user.password);
   if (!isMatch) {
     res
@@ -49,7 +49,7 @@ export const login = async (req, res) => {
 
 export const getMyProfile = async (req, res) => {
   try {
-    const { token } = req.cookies;
+    const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -66,15 +66,10 @@ export const getMyProfile = async (req, res) => {
     }
     res.status(200).json({
       success: true,
+      message: `User ${user.name} found successfully`,
       user: user,
     });
   } catch (error) {
-    // } catch (error) {
-    //   if (error instanceof jwt.JsonWebTokenError) {
-    //     console.error("JWT error:", error.message);
-    //   } else {
-    //     console.error("Error:", error.message);
-    //   }
     console.error("Error:", error.message);
     res.status(500).json({
       success: false,
@@ -82,3 +77,26 @@ export const getMyProfile = async (req, res) => {
     });
   }
 };
+
+export const logout = (req, res) => {
+  res
+    .status(200)
+    .cookie("token", "", { expires: new Date(Date.now()) })
+    .json({
+      success: true,
+    });
+};
+
+// export const verifyToken = async (req, res, next) => {
+//   const bearerHeader = req.headers["Authorization"];
+//   if (typeof bearerHeader !== "undefined") {
+//     const bearer = bearerHeader.split(" ");
+//     const token = bearer[1];
+//     req.token = token;
+//     next();
+//   } else {
+//     res.send({
+//       result: "token is not valid",
+//     });
+//   }
+// };

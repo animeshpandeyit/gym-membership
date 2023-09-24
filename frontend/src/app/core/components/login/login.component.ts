@@ -10,11 +10,12 @@ import { LoginUserDataModel } from '../../models/login-data.model';
 })
 export class LoginComponent implements OnInit {
   islogin: boolean = false;
-
   loginUserData = {
     email: '',
     password: '',
   };
+
+  responseData: any;
 
   constructor(private router: Router, private _auth: AuthService) {}
 
@@ -27,9 +28,11 @@ export class LoginComponent implements OnInit {
   loginFirst() {
     this._auth.loginUser(this.loginUserData).subscribe(
       (res) => {
-        if (res.token) {
+        if (res && res.token != null) {
+          // this.responseData = res;
+          // console.log('responseData::', this.responseData);
           localStorage.setItem('token', res.token);
-          console.log('Token stored:', res.token);
+          // localStorage.setItem('token', JSON.stringify(res.token));
           this.router.navigate(['/user/home']);
         } else {
           console.log('Authentication failed. Token not received.');
