@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { LoginUserDataModel } from '../../models/login-data.model';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +14,7 @@ export class LoginComponent implements OnInit {
   };
 
   responseData: any;
+  userState: any;
 
   constructor(private router: Router, private _auth: AuthService) {}
 
@@ -25,14 +24,32 @@ export class LoginComponent implements OnInit {
     this.islogin = !this.islogin;
   }
 
+  // loginFirst() {
+  //   this._auth.loginUser(this.loginUserData).subscribe(
+  //     (res) => {
+  //       if (res && res.token != null) {
+  //         // this.responseData = res;
+  //         // console.log('responseData::', this.responseData);
+  //         localStorage.setItem('token', res.token);
+  //         // localStorage.setItem('token', JSON.stringify(res.token));
+  //         this.router.navigate(['/user/home']);
+  //       } else {
+  //         console.log('Authentication failed. Token not received.');
+  //       }
+  //     },
+  //     (err) => {
+  //       console.log('Login error:', err);
+  //     }
+  //   );
+  // }
+
   loginFirst() {
     this._auth.loginUser(this.loginUserData).subscribe(
       (res) => {
         if (res && res.token != null) {
-          // this.responseData = res;
-          // console.log('responseData::', this.responseData);
+          this.userState = res as any;
+          // console.log('Token received:', res.token);// Log the token
           localStorage.setItem('token', res.token);
-          // localStorage.setItem('token', JSON.stringify(res.token));
           this.router.navigate(['/user/home']);
         } else {
           console.log('Authentication failed. Token not received.');
@@ -43,6 +60,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
   // async loginFirst() {
   //   try {
   //     const res = await this._auth

@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private _authService: AuthService) {}
 
   ngOnInit(): void {
-    this.getUserDetails();
+    // this.getUserDetails();
   }
   logoutUser() {
     this._authService.logoutUser().subscribe((res) => {
@@ -25,11 +25,11 @@ export class HeaderComponent implements OnInit {
   }
 
   getUserDetails() {
-    debugger;
+    // debugger;
     this._authService.getProfile().subscribe(
       (response: any) => {
         this.user = response.user;
-        debugger;
+        // debugger;
       }
       // ,
       // (error) => {

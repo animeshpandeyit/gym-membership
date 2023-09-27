@@ -1,1 +1,74 @@
-<p>homepage works!</p>
+<div class="container mb-5 mt-5">
+  <div class="d-flex flex-column justify-content-center">
+    <form #todolist="ngForm" (ngSubmit)="submitForm()">
+      <div class="form-group mt-3">
+        <label class="catchyfont-s">Title:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          class="form-control"
+          required
+          minlength="4"
+          [(ngModel)]="todolistModel.title"
+          #title="ngModel"
+        />
+
+        <div
+          *ngIf="title.invalid && (title.dirty || title.touched)"
+          class="text-danger"
+        >
+          <div *ngIf="title.errors?.['required']">Title is required.</div>
+          <div *ngIf="title.errors?.['minlength']">
+            Title must be at least 4 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label class="catchyfont-s">Description:</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          class="form-control"
+          required
+          minlength="4"
+          [(ngModel)]="todolistModel.description"
+          #description="ngModel"
+        />
+
+        <div
+          *ngIf="
+            description.invalid && (description.dirty || description.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="description.errors?.['required']">
+            Description is required.
+          </div>
+          <div *ngIf="description.errors?.['minlength']">
+            description must be at least 4 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-3">
+        <label>
+          <input
+            type="checkbox"
+            id="isCompleted"
+            name="isCompleted"
+            [(ngModel)]="todolistModel.isCompleted"
+            (change)="toggleCompletion()"
+          />
+          Task Completed
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-4 catchyfont-s">
+        Create list of
+      </button>
+    </form>
+  </div>
+</div>

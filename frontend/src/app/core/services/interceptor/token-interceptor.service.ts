@@ -1,7 +1,6 @@
 import {
   HttpEvent,
   HttpHandler,
-  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
@@ -15,12 +14,16 @@ export class TokenInterceptorService implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    debugger;
-
     const token = localStorage.getItem('token');
-    request = request.clone({
-      headers: request.headers.set('Authorization', 'Bearer ' + token),
-    });
+    console.log('Token from TokenInterceptor:', token);
+
+    if (token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
 
     return next.handle(request);
   }
@@ -53,24 +56,23 @@ export class TokenInterceptorService implements HttpInterceptor {
 //     return next.handle(request);
 // }
 
-// intercept(
-//   request: HttpRequest<any>,
-//   next: HttpHandler
-// ): Observable<HttpEvent<any>> {
-//   // const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-//   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-//   console.log('currentUser', currentUser);
-//   if (currentUser && currentUser.token) {
-//     request = request.clone({
-//       setHeaders: {
-//         Authorization: `Bearer ${currentUser.token}`,
-//       },
-//     });
+//   intercept(
+//     request: HttpRequest<any>,
+//     next: HttpHandler
+//   ): Observable<HttpEvent<any>> {
+//     const currentUser = JSON.parse(localStorage.getItem('currentUser') ?? '{}');
+//     console.log('currentUser', currentUser);
+//     if (currentUser?.token) {
+//       request = request.clone({
+//         setHeaders: {
+//           Authorization: `Bearer ${currentUser.token}`,
+//         },
+//       });
+//     }
+
+//     return next.handle(request);
 //   }
-
-//   return next.handle(request);
 // }
-
 // const token = localStorage.getItem('token'); // Assuming the token is stored in localStorage
 
 // if (token) {

@@ -3,6 +3,7 @@ import { CreateRegistrationModel } from '../../models/create-registration.model'
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-account',
@@ -13,6 +14,7 @@ export class CreateAccountComponent implements OnInit {
   registrationModel: CreateRegistrationModel;
 
   registeredUser: any;
+  // registerForm: any;
 
   constructor(
     private _auth: AuthService,
@@ -25,17 +27,13 @@ export class CreateAccountComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    // console.log(this.registrationModel);
     this._auth.register(this.registrationModel).subscribe(
       (res: any) => {
         console.log(res);
-        localStorage.setItem('token', res.token);
-        // const token = res.token;
-        console.log('Token stored register:', res.token);
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Error creating customer', error);
-
         const errorMessage = error.error.message;
         alert(errorMessage);
       }

@@ -28,8 +28,8 @@ import { TokenInterceptorService } from './core/services/interceptor/token-inter
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
-      multi: true,
-    },
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
